@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "baseUrl": "./src",
+    "outDir": "./dist",
+    "declaration": false,
+    "sourceMap": false,
+    
+  },
+  "include": [
+    "src/**/*.ts",
+    "temp/runner.ts"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ],
+  
+}
