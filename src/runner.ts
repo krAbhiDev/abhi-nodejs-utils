@@ -1,14 +1,25 @@
 import inquirer from 'inquirer';
 
-interface Test  {
+interface Task {
     name: string;
     callback: Function;
 }
 
-  class Runner {
-     tests: Test[] = [];
-    addTest(name: string, callback: Function) {
-        this.tests.push({ name, callback });
+class Runner {
+    private tasks: Task[] = [];
+    addTask(name: string, callback: Function) {
+        this.tasks.push({ name, callback });
+    }
+
+    async input(message: string) {
+        const { value } = await inquirer.prompt([
+            {
+                type: 'input',
+                name: 'value',
+                message
+            }
+        ]);
+        return value as string
     }
     async run() {
         const { test } = await inquirer.prompt([
@@ -16,14 +27,14 @@ interface Test  {
                 type: 'list',
                 name: 'test',
                 message: 'Select a test:',
-                choices: this.tests.map(test => test.name)
+                choices: this.tasks.map(test => test.name)
             }
         ]);
-        const selectedTest = this.tests.find(t => t.name === test);
+        const selectedTest = this.tasks.find(t => t.name === test);
         if (selectedTest) {
             await selectedTest.callback();
         }
     }
 
 }
-export { Runner, Test }
+export { Runner, Task }
